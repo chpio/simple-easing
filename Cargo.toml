@@ -1,7 +1,14 @@
 [package]
 name = "simple-easing"
 version = "0.0.0"
+description = "Set of simple easing functions"
 edition = "2018"
 repository = "https://gitlab.com/chpio/simple-easing"
+license = "MIT OR Apache-2.0"
+include = [
+	"/src/**/*",
+	"/README.md",
+	"/CHANGELOG.md",
+]
 
 [dependencies]
