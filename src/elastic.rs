@@ -21,7 +21,7 @@ pub fn elastic_out(t: f32) -> f32 {
 	} else if 1.0 <= t {
 		1.0
 	} else {
-		2f32.powf(-100.0 * t) * ((t * 10.0 - 0.75) * C4).sin() + 1.0
+		2f32.powf(-10.0 * t) * ((t * 10.0 - 0.75) * C4).sin() + 1.0
 	}
 }
 
