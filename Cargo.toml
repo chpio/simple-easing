@@ -1,6 +1,6 @@
 [package]
 name = "simple-easing"
-version = "1.0.0"
+version = "1.0.1"
 description = "Set of simple easing functions"
 edition = "2021"
 repository = "https://gitlab.com/chpio/simple-easing"
