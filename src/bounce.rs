@@ -16,9 +16,9 @@ pub fn bounce_out(t: f32) -> f32 {
 	} else if t < 2.0 / D1 {
 		N1 * (t - 1.5 / D1).powi(2) + 0.75
 	} else if t < 2.5 / D1 {
-		N1 * (t - 2.25 / D1).powi(2) + 0.9375
+		N1 * (t - 2.25 / D1).powi(2) + 0.937_5
 	} else {
-		N1 * (t - 2.625 / D1).powi(2) + 0.984375
+		N1 * (t - 2.625 / D1).powi(2) + 0.984_375
 	}
 }
 
@@ -29,6 +29,6 @@ pub fn bounce_in_out(t: f32) -> f32 {
 	if t < 0.5 {
 		(1.0 - bounce_out(1.0 - 2.0 * t)) / 2.0
 	} else {
-		(1.0 + bounce_out(2.0 * t - 1.0)) / 2.0
+		f32::midpoint(1.0, bounce_out(2.0 * t - 1.0))
 	}
 }

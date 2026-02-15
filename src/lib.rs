@@ -20,6 +20,8 @@
 //! assert_eq!(easing(1.0), 1.0);
 //! ```
 
+#![warn(clippy::pedantic)]
+
 mod back;
 mod bounce;
 mod circ;
