@@ -2,7 +2,7 @@
 name = "simple-easing"
 version = "1.0.1"
 description = "Set of simple easing functions"
-edition = "2021"
+edition = "2024"
 repository = "https://gitlab.com/chpio/simple-easing"
 license = "MIT OR Apache-2.0"
 include = [
