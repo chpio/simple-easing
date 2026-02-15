@@ -12,13 +12,13 @@ pub fn bounce_out(t: f32) -> f32 {
 	const N1: f32 = 7.5625;
 	const D1: f32 = 2.75;
 	if t < 1.0 / D1 {
-		return N1 * t * t;
+		N1 * t * t
 	} else if t < 2.0 / D1 {
-		return N1 * (t - 1.5 / D1).powi(2) + 0.75;
+		N1 * (t - 1.5 / D1).powi(2) + 0.75
 	} else if t < 2.5 / D1 {
-		return N1 * (t - 2.25 / D1).powi(2) + 0.9375;
+		N1 * (t - 2.25 / D1).powi(2) + 0.9375
 	} else {
-		return N1 * (t - 2.625 / D1).powi(2) + 0.984375;
+		N1 * (t - 2.625 / D1).powi(2) + 0.984375
 	}
 }
 
