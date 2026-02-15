@@ -42,11 +42,13 @@ pub use quart::*;
 pub use quint::*;
 pub use sine::*;
 
+#[inline]
 pub fn linear(t: f32) -> f32 {
 	t
 }
 
 /// A linear easing that goes from `1.0` to `0.0`.
+#[inline]
 pub fn reverse(t: f32) -> f32 {
 	1.0 - t
 }
@@ -61,6 +63,7 @@ pub fn reverse(t: f32) -> f32 {
 /// let descending = cubic_in(roundtrip(0.75));
 /// assert!((ascending - descending).abs() < 0.001);
 /// ```
+#[inline]
 pub fn roundtrip(t: f32) -> f32 {
 	if t < 0.5 { t * 2.0 } else { (1.0 - t) * 2.0 }
 }

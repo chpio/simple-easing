@@ -1,4 +1,5 @@
 /// <https://easings.net/#easeInExpo>
+#[inline]
 pub fn expo_in(t: f32) -> f32 {
 	if t <= 0.0 {
 		0.0
@@ -8,6 +9,7 @@ pub fn expo_in(t: f32) -> f32 {
 }
 
 /// <https://easings.net/#easeOutExpo>
+#[inline]
 pub fn expo_out(t: f32) -> f32 {
 	if 1.0 <= t {
 		1.0
@@ -17,6 +19,7 @@ pub fn expo_out(t: f32) -> f32 {
 }
 
 /// <https://easings.net/#easeInOutExpo>
+#[inline]
 pub fn expo_in_out(t: f32) -> f32 {
 	if t <= 0.0 {
 		0.0
