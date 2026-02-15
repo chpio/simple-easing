@@ -62,9 +62,5 @@ pub fn reverse(t: f32) -> f32 {
 /// assert!((ascending - descending).abs() < 0.001);
 /// ```
 pub fn roundtrip(t: f32) -> f32 {
-	if t < 0.5 {
-		t * 2.0
-	} else {
-		(1.0 - t) * 2.0
-	}
+	if t < 0.5 { t * 2.0 } else { (1.0 - t) * 2.0 }
 }
