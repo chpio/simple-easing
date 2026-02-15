@@ -20,7 +20,8 @@
 //! assert_eq!(easing(1.0), 1.0);
 //! ```
 
-#![warn(clippy::pedantic)]
+#![warn(clippy::pedantic, clippy::nursery)]
+#![allow(clippy::missing_const_for_fn)]
 
 mod back;
 mod bounce;

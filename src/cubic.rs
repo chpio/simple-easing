@@ -19,6 +19,6 @@ pub fn cubic_in_out(t: f32) -> f32 {
 	if t < 0.5 {
 		4.0 * t * t * t
 	} else {
-		1.0 - (-2.0 * t + 2.0).powi(3) / 2.0
+		1.0 - (-2.0f32).mul_add(t, 2.0).powi(3) / 2.0
 	}
 }

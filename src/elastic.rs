@@ -12,7 +12,7 @@ pub fn elastic_in(t: f32) -> f32 {
 	} else if 1.0 <= t {
 		1.0
 	} else {
-		-2f32.powf(10.0 * t - 10.0) * ((t * 10.0 - 10.75) * C4).sin()
+		-10.0f32.mul_add(t, -10.0).exp2() * (t.mul_add(10.0, -10.75) * C4).sin()
 	}
 }
 
@@ -25,7 +25,9 @@ pub fn elastic_out(t: f32) -> f32 {
 	} else if 1.0 <= t {
 		1.0
 	} else {
-		2f32.powf(-10.0 * t) * ((t * 10.0 - 0.75) * C4).sin() + 1.0
+		(-10.0 * t)
+			.exp2()
+			.mul_add((t.mul_add(10.0, -0.75) * C4).sin(), 1.0)
 	}
 }
 
@@ -38,8 +40,8 @@ pub fn elastic_in_out(t: f32) -> f32 {
 	} else if 1.0 <= t {
 		1.0
 	} else if t < 0.5 {
-		-(2f32.powf(20.0 * t - 10.0) * ((20.0 * t - 11.125) * C5).sin()) / 2.0
+		-(20.0f32.mul_add(t, -10.0).exp2() * (20.0f32.mul_add(t, -11.125) * C5).sin()) / 2.0
 	} else {
-		(2f32.powf(-20.0 * t + 10.0) * ((20.0 * t - 11.125) * C5).sin()) / 2.0 + 1.0
+		((-20.0f32).mul_add(t, 10.0).exp2() * (20.0f32.mul_add(t, -11.125) * C5).sin()) / 2.0 + 1.0
 	}
 }
