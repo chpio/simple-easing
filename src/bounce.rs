@@ -1,11 +1,13 @@
 /// <https://easings.net/#easeInBounce>
 #[inline]
+#[must_use]
 pub fn bounce_in(t: f32) -> f32 {
 	1.0 - bounce_out(1.0 - t)
 }
 
 /// <https://easings.net/#easeOutBounce>
 #[inline]
+#[must_use]
 pub fn bounce_out(t: f32) -> f32 {
 	const N1: f32 = 7.5625;
 	const D1: f32 = 2.75;
@@ -22,6 +24,7 @@ pub fn bounce_out(t: f32) -> f32 {
 
 /// <https://easings.net/#easeInOutBounce>
 #[inline]
+#[must_use]
 pub fn bounce_in_out(t: f32) -> f32 {
 	if t < 0.5 {
 		(1.0 - bounce_out(1.0 - 2.0 * t)) / 2.0

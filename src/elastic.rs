@@ -5,6 +5,7 @@ const C5: f32 = (2.0 * PI) / 4.5;
 
 /// <https://easings.net/#easeInElastic>
 #[inline]
+#[must_use]
 pub fn elastic_in(t: f32) -> f32 {
 	if t <= 0.0 {
 		0.0
@@ -17,6 +18,7 @@ pub fn elastic_in(t: f32) -> f32 {
 
 /// <https://easings.net/#easeOutElastic>
 #[inline]
+#[must_use]
 pub fn elastic_out(t: f32) -> f32 {
 	if t <= 0.0 {
 		0.0
@@ -29,6 +31,7 @@ pub fn elastic_out(t: f32) -> f32 {
 
 /// <https://easings.net/#easeInOutElastic>
 #[inline]
+#[must_use]
 pub fn elastic_in_out(t: f32) -> f32 {
 	if t <= 0.0 {
 		0.0

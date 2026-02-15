@@ -43,12 +43,14 @@ pub use quint::*;
 pub use sine::*;
 
 #[inline]
+#[must_use]
 pub fn linear(t: f32) -> f32 {
 	t
 }
 
 /// A linear easing that goes from `1.0` to `0.0`.
 #[inline]
+#[must_use]
 pub fn reverse(t: f32) -> f32 {
 	1.0 - t
 }
@@ -64,6 +66,7 @@ pub fn reverse(t: f32) -> f32 {
 /// assert!((ascending - descending).abs() < 0.001);
 /// ```
 #[inline]
+#[must_use]
 pub fn roundtrip(t: f32) -> f32 {
 	if t < 0.5 { t * 2.0 } else { (1.0 - t) * 2.0 }
 }

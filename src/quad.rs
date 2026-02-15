@@ -1,17 +1,20 @@
 /// <https://easings.net/#easeInQuad>
 #[inline]
+#[must_use]
 pub fn quad_in(t: f32) -> f32 {
 	t * t
 }
 
 /// <https://easings.net/#easeOutQuad>
 #[inline]
+#[must_use]
 pub fn quad_out(t: f32) -> f32 {
 	1.0 - (1.0 - t).powi(2)
 }
 
 /// <https://easings.net/#easeInOutQuad>
 #[inline]
+#[must_use]
 pub fn quad_in_out(t: f32) -> f32 {
 	if t < 0.5 {
 		2.0 * t * t
