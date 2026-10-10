@@ -10,8 +10,11 @@ keywords = ["easing", "animation", "tween", "interpolation", "transition"]
 categories = ["game-development", "graphics", "mathematics"]
 include = [
 	"/src/**/*",
+	"/tests/**/*",
 	"/README.md",
 	"/CHANGELOG.md",
+	"/LICENSE-MIT",
+	"/LICENSE-APACHE",
 ]
 
 [dependencies]

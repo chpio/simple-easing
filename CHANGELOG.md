@@ -4,6 +4,7 @@
 
 * add `EasingFn` type alias for `fn(f32) -> f32`
 * add `AnyEasingFn` trait, implemented by every `Fn(f32) -> f32` (incl. capturing closures)
+* include tests and license files in the published package
 
 ## 1.0.3
 
