@@ -50,3 +50,8 @@ must be added to `REFERENCES` and, if it forms an `in`/`out`/`in_out` triple, to
   `build:`).
 - User-visible changes get an entry in `CHANGELOG.md` (under `## Unreleased` until a release);
   version bumps are a separate commit (`chore: bump version (vX.Y.Z)`).
+- Commits and tags are GPG-signed.
+- Release: bump `version` in `Cargo.toml` and rename `## Unreleased` to `## X.Y.Z` in
+  `CHANGELOG.md` (the bump commit touches only these two files; `Cargo.lock` is untracked),
+  create a signed annotated tag (`git tag -s vX.Y.Z -m "vX.Y.Z"`), push `main` and the tag,
+  then `cargo publish`.
