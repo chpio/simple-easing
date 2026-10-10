@@ -3,8 +3,11 @@ name = "simple-easing"
 version = "1.0.2"
 description = "Set of simple easing functions"
 edition = "2024"
+rust-version = "1.85"
 repository = "https://gitlab.com/chpio/simple-easing"
 license = "MIT OR Apache-2.0"
+keywords = ["easing", "animation", "tween", "interpolation", "transition"]
+categories = ["game-development", "graphics", "mathematics"]
 include = [
 	"/src/**/*",
 	"/README.md",
