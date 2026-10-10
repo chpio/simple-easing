@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+* improve crate docs and README
+
 ## 1.1.0
 
 * add `EasingFn` type alias for `fn(f32) -> f32`

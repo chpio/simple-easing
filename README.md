@@ -1,7 +1,8 @@
 # simple-easing
 
 This package contains a set of simple easing functions, as visualised on
-[easings.net](https://easings.net/).
+[easings.net](https://easings.net/). Function names follow easings.net, e.g. `easeInOutCubic`
+is `cubic_in_out`.
 
 Each function takes the progress of a transition as `t` in the range `0.0..=1.0` and returns
 the eased progress, which can be used to interpolate between the start (`0.0`) and the end
@@ -49,11 +50,6 @@ fn halfway(easing: impl AnyEasingFn) -> f32 {
 let a = halfway(cubic_in);
 let b = halfway(&easings[1]);
 ```
-
-## Functions
-
-`linear`, `reverse`, `roundtrip`, and an `*_in`, `*_out` and `*_in_out` variant of each of
-`sine`, `quad`, `cubic`, `quart`, `quint`, `expo`, `circ`, `back`, `elastic` and `bounce`.
 
 ## License
 

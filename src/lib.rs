@@ -1,43 +1,52 @@
-//! This package contains a set of simple easing functions. That consume a standardised `time`
-//! attribute in the range between `0.0` and `1.0`, that represent the progress of a transition.
-//! `0.0` being the beginning, `1.0` the end.
+//! This package contains a set of simple easing functions, as visualised on
+//! [easings.net](https://easings.net/). Function names follow easings.net, e.g. `easeInOutCubic`
+//! is [`cubic_in_out`].
 //!
-//! They return a value between `0.0` and `1.0` (it might exceed the `0..=1` range temporarily
-//! for a bounce effect). The returned value can be used to interpolate between the initial
-//! (`0.0`) and the final (`1.0`) transition state, allowing for a "more natural" feel of
-//! a transition by accelerating and decelerating at certain points, depending on the easing
-//! function used.
+//! Each function takes the progress of a transition as `t` in the range `0.0..=1.0` and returns
+//! the eased progress, which can be used to interpolate between the start (`0.0`) and the end
+//! (`1.0`) state. The result might leave the `0..=1` range temporarily (e.g. `back_*` and
+//! `elastic_*`).
 //!
-//! Visit [easings.net](https://easings.net/) to see visualisations of the different
-//! easing functions.
-//!
-//! All easing functions have the same signature (`(f32) -> f32`) and can be easily stored as
-//! fn pointers of type [`EasingFn`]. Custom easings are just closures: as long as they don't
-//! capture variables, they are [`EasingFn`]s too. To also accept closures that do capture
-//! variables, use the [`AnyEasingFn`] trait.
+//! All functions share the signature `fn(f32) -> f32`, so they can be stored as fn pointers of
+//! type [`EasingFn`]:
 //!
 //! ```
-//! use ::simple_easing::{AnyEasingFn, EasingFn, back_out, cubic_in, roundtrip};
+//! use ::simple_easing::{EasingFn, cubic_in_out, roundtrip};
 //!
-//! // every easing function fits into a plain fn pointer
-//! let cubic: EasingFn = cubic_in;
+//! let easing: EasingFn = cubic_in_out;
+//! let value = easing(0.5);
+//! assert!((value - 0.5).abs() < 0.001);
 //!
-//! // so do custom easings, built from closures that don't capture anything
+//! // `roundtrip` goes from `0.0` to `1.0` and back, and composes with any other easing
+//! let pulse = easing(roundtrip(0.75));
+//! ```
+//!
+//! Custom easings are just closures. As long as they don't capture variables, they are
+//! [`EasingFn`]s too:
+//!
+//! ```
+//! use ::simple_easing::{EasingFn, back_out, cubic_in, roundtrip};
+//!
 //! let pulse: EasingFn = |t| cubic_in(roundtrip(t));
 //! let half_back: EasingFn = |t| back_out(t) * 0.5;
+//! ```
 //!
-//! // a closure capturing a runtime value doesn't, but it implements `AnyEasingFn`
+//! To also accept closures that capture variables, use the [`AnyEasingFn`] trait:
+//!
+//! ```
+//! use ::simple_easing::{AnyEasingFn, cubic_in};
+//!
 //! let power = 2.5;
-//! let custom = move |t: f32| t.powf(power);
+//! let easings: Vec<Box<dyn AnyEasingFn>> = vec![
+//!     Box::new(cubic_in),
+//!     Box::new(move |t: f32| t.powf(power)),
+//! ];
 //!
-//! // `AnyEasingFn` accepts all of them
 //! fn halfway(easing: impl AnyEasingFn) -> f32 {
 //!     easing(0.5)
 //! }
-//! assert_eq!(halfway(cubic), 0.125);
-//! assert_eq!(halfway(pulse), 1.0);
-//! assert_eq!(halfway(half_back), back_out(0.5) * 0.5);
-//! assert!(halfway(custom) < 0.5);
+//! let a = halfway(cubic_in);
+//! let b = halfway(&easings[1]);
 //! ```
 
 #![warn(clippy::pedantic, clippy::nursery)]
