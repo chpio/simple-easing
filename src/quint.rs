@@ -2,7 +2,7 @@
 #[inline]
 #[must_use]
 pub fn quint_in(t: f32) -> f32 {
-	t * t * t * t
+	t * t * t * t * t
 }
 
 /// <https://easings.net/#easeOutQuint>

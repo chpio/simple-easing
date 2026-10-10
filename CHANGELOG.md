@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+* repair `quint_in` function
+
 ## 1.0.2
 
 * use rust edition 2024
