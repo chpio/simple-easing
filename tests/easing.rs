@@ -1,12 +1,11 @@
 use ::simple_easing::*;
 use ::std::f64::consts::PI;
 
-type Easing = fn(f32) -> f32;
 type Reference = fn(f64) -> f64;
 
 /// Every easing function next to an `f64` reference implementation, transcribed from the
 /// formulas on <https://easings.net/>.
-const REFERENCES: &[(&str, Easing, Reference)] = &[
+const REFERENCES: &[(&str, EasingFn, Reference)] = &[
 	("linear", linear, |x| x),
 	("reverse", reverse, |x| 1.0 - x),
 	("roundtrip", roundtrip, |x| {
@@ -143,7 +142,7 @@ const REFERENCES: &[(&str, Easing, Reference)] = &[
 ];
 
 /// All `*_in`, `*_out` and `*_in_out` triples.
-const FAMILIES: &[(&str, [Easing; 3])] = &[
+const FAMILIES: &[(&str, [EasingFn; 3])] = &[
 	("sine", [sine_in, sine_out, sine_in_out]),
 	("quad", [quad_in, quad_out, quad_in_out]),
 	("cubic", [cubic_in, cubic_out, cubic_in_out]),

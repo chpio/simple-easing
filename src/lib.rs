@@ -12,12 +12,32 @@
 //! easing functions.
 //!
 //! All easing functions have the same signature (`(f32) -> f32`) and can be easily stored as
-//! fn pointers.
+//! fn pointers of type [`EasingFn`]. Custom easings are just closures: as long as they don't
+//! capture variables, they are [`EasingFn`]s too. To also accept closures that do capture
+//! variables, use the [`AnyEasingFn`] trait.
 //!
 //! ```
-//! use ::simple_easing::linear;
-//! let easing: fn(f32) -> f32 = linear;
-//! assert_eq!(easing(1.0), 1.0);
+//! use ::simple_easing::{AnyEasingFn, EasingFn, back_out, cubic_in, roundtrip};
+//!
+//! // every easing function fits into a plain fn pointer
+//! let cubic: EasingFn = cubic_in;
+//!
+//! // so do custom easings, built from closures that don't capture anything
+//! let pulse: EasingFn = |t| cubic_in(roundtrip(t));
+//! let half_back: EasingFn = |t| back_out(t) * 0.5;
+//!
+//! // a closure capturing a runtime value doesn't, but it implements `AnyEasingFn`
+//! let power = 2.5;
+//! let custom = move |t: f32| t.powf(power);
+//!
+//! // `AnyEasingFn` accepts all of them
+//! fn halfway(easing: impl AnyEasingFn) -> f32 {
+//!     easing(0.5)
+//! }
+//! assert_eq!(halfway(cubic), 0.125);
+//! assert_eq!(halfway(pulse), 1.0);
+//! assert_eq!(halfway(half_back), back_out(0.5) * 0.5);
+//! assert!(halfway(custom) < 0.5);
 //! ```
 
 #![warn(clippy::pedantic, clippy::nursery)]
@@ -44,6 +64,30 @@ pub use quad::*;
 pub use quart::*;
 pub use quint::*;
 pub use sine::*;
+
+/// The signature shared by all easing functions of this crate.
+pub type EasingFn = fn(f32) -> f32;
+
+/// Any easing: the functions of this crate, [`EasingFn`]s and closures, including ones that
+/// capture variables.
+///
+/// ```
+/// use ::simple_easing::{AnyEasingFn, back_in, cubic_in};
+///
+/// fn sample(easing: impl AnyEasingFn) -> f32 {
+///     easing(0.5)
+/// }
+///
+/// let strength = 0.5;
+/// let easings: Vec<Box<dyn AnyEasingFn>> = vec![
+///     Box::new(cubic_in),
+///     Box::new(move |t| back_in(t) * strength),
+/// ];
+/// assert_eq!(sample(&easings[0]), 0.125);
+/// ```
+pub trait AnyEasingFn: Fn(f32) -> f32 {}
+
+impl<F: Fn(f32) -> f32> AnyEasingFn for F {}
 
 #[inline]
 #[must_use]

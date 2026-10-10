@@ -22,7 +22,9 @@ cargo fmt                           # uses hard tabs (.rustfmt.toml)
 
 - One module per easing family (`quad`, `cubic`, `quart`, `quint`, `sine`, `expo`, `circ`,
   `back`, `elastic`, `bounce`), each glob re-exported from `src/lib.rs`, so the public API is
-  flat (`simple_easing::cubic_in`). `linear`, `reverse` and `roundtrip` live directly in `lib.rs`.
+  flat (`simple_easing::cubic_in`). `linear`, `reverse`, `roundtrip`, the `EasingFn` type
+  alias and the `AnyEasingFn` trait (blanket-implemented for `Fn(f32) -> f32`) live directly in
+  `lib.rs`.
 - Every public function has the identical signature `fn(f32) -> f32` so they can be stored as
   fn pointers — keep it that way. Input `t` is progress in `0.0..=1.0`; output is nominally
   `0.0..=1.0` but may overshoot (back, elastic).
