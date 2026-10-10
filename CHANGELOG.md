@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.0.3
 
 * repair `quint_in` function
 * declare minimum supported rust version (1.85)
