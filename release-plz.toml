@@ -1,0 +1,50 @@
+# release-plz config (https://release-plz.dev/docs/config), run in CI by the release jobs. The API
+# is checked with cargo-semver-checks (the default), a breaking change makes the next version a
+# major one even without a `feat!:` commit.
+
+[workspace]
+# Only releases for changes users notice, the same commits that end up in the changelog. Commits
+# that don't touch a file of the package (e.g. `docs:` on CLAUDE.md) are left out anyway.
+release_commits = "^(feat|fix|docs)"
+pr_name = "chore: bump version (v{{ version }})"
+pr_branch_prefix = "release/"
+
+[changelog]
+header = "# Changelog\n"
+# The description of the conventional commit is the entry (`feat: add foo` → `* add foo`), in a
+# section per type, the empty ones are left out.
+body = """
+## {{ version }}
+{%- set features = commits | filter(attribute="group", value="features") %}
+{%- set fixes = commits | filter(attribute="group", value="fixes") %}
+{%- set docs = commits | filter(attribute="group", value="docs") %}
+{%- if features | length > 0 %}
+
+### Features
+{% for commit in features %}
+* {{ commit.message }}
+{%- endfor %}
+{%- endif %}
+{%- if fixes | length > 0 %}
+
+### Fixes
+{% for commit in fixes %}
+* {{ commit.message }}
+{%- endfor %}
+{%- endif %}
+{%- if docs | length > 0 %}
+
+### Documentation
+{% for commit in docs %}
+* {{ commit.message }}
+{%- endfor %}
+{%- endif %}
+
+"""
+sort_commits = "oldest"
+commit_parsers = [
+	{ message = "^feat", group = "features" },
+	{ message = "^fix", group = "fixes" },
+	{ message = "^docs", group = "docs" },
+	{ message = ".*", skip = true },
+]

@@ -48,10 +48,18 @@ must be added to `REFERENCES` and, if it forms an `in`/`out`/`in_out` triple, to
 
 - Commits follow Conventional Commits (`feat:`, `fix:`, `test:`, `docs:`, `chore:`, `style:`,
   `build:`).
-- User-visible changes get an entry in `CHANGELOG.md` (under `## Unreleased` until a release);
-  version bumps are a separate commit (`chore: bump version (vX.Y.Z)`).
-- Commits and tags are GPG-signed.
-- Release: bump `version` in `Cargo.toml` and rename `## Unreleased` to `## X.Y.Z` in
-  `CHANGELOG.md` (the bump commit touches only these two files; `Cargo.lock` is untracked),
-  create a signed annotated tag (`git tag -s vX.Y.Z -m "vX.Y.Z"`), push `main` and the tag,
-  then `cargo publish`.
+- Only `feat:`, `fix:` and `docs:` end up in the changelog and trigger a release (only if they
+  touch a file of the package, so not for CLAUDE.md), so a user-visible change needs one of them
+  (otherwise as a commit of its own); their description is the changelog entry, written for
+  users. There's no hand-written `## Unreleased` section.
+- Commits are GPG-signed.
+- Releases are done by release-plz (`release-plz.toml`) in CI (`.gitea/workflows/ci.yaml`, on
+  pushes to `main` after the tests): the `release-pr` job keeps a PR
+  `chore: bump version (vX.Y.Z)` open (branch `release/…`) that bumps the version in
+  `Cargo.toml` (from the commits since the last release on crates.io and cargo-semver-checks)
+  and adds the `CHANGELOG.md` section, generated from the commits (`### Features`,
+  `### Fixes`, `### Documentation`). Merging it makes the `release` job publish to crates.io and create the tag
+  `vX.Y.Z` (unsigned, through the Gitea API) and the Gitea release. Both use the secrets
+  `RELEASE_PLZ_TOKEN` (Gitea token with repository read/write) and `CARGO_REGISTRY_TOKEN`, and
+  `--registry crates-io`, as the CI image replaces crates.io with the kellnr proxy.
+  `release-plz update` shows the bump and changelog locally.
