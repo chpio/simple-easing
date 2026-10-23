@@ -60,6 +60,9 @@ must be added to `REFERENCES` and, if it forms an `in`/`out`/`in_out` triple, to
   and adds the `CHANGELOG.md` section, generated from the commits (`### Features`,
   `### Fixes`, `### Documentation`). Merging it makes the `release` job publish to crates.io and create the tag
   `vX.Y.Z` (unsigned, through the Gitea API) and the Gitea release. Both use the secrets
-  `RELEASE_PLZ_TOKEN` (Gitea token with repository read/write) and `CARGO_REGISTRY_TOKEN`, and
-  `--registry crates-io`, as the CI image replaces crates.io with the kellnr proxy.
+  `RELEASE_PLZ_TOKEN` (Gitea token with repository read/write) and `CARGO_REGISTRY_TOKEN`. The
+  CI image replaces crates.io with the kellnr proxy (in `$CARGO_HOME/config.toml`), both jobs
+  bypass it with an empty `CARGO_HOME`: kellnr caches the index files for about 30 minutes, so
+  release-plz waited that long after `cargo publish` for the version to show up (the default
+  timeout is 30 minutes too), and `release-pr` wouldn't see the version just released.
   `release-plz update` shows the bump and changelog locally.
