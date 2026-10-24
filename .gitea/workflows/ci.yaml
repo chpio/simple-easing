@@ -8,7 +8,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: ${{ vars.DOCKER_REGISTRY }}/git/rust:latest
+    container: ${{ vars.DOCKER_REGISTRY }}/git/ci-rust:latest
     steps:
       - uses: actions/checkout@v7
       - run: cargo fmt --check
@@ -22,7 +22,7 @@ jobs:
     needs: [test]
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
-    container: ${{ vars.DOCKER_REGISTRY }}/git/rust:latest
+    container: ${{ vars.DOCKER_REGISTRY }}/git/ci-rust:latest
     steps:
       - uses: actions/checkout@v7
         with:
@@ -42,7 +42,7 @@ jobs:
   release-pr:
     needs: [release]
     runs-on: ubuntu-latest
-    container: ${{ vars.DOCKER_REGISTRY }}/git/rust:latest
+    container: ${{ vars.DOCKER_REGISTRY }}/git/ci-rust:latest
     steps:
       - uses: actions/checkout@v7
         with:
