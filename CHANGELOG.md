@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.2
+
+### Documentation
+
+* link the GitHub repository and the GitLab mirror
+
 ## 1.1.1
 
 * improve crate docs and README
