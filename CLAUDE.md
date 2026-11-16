@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 `simple-easing` is a small, dependency-free Rust library crate (edition 2024) of easing functions
 modelled on [easings.net](https://easings.net/). Published to crates.io; upstream repo is on
-GitLab (`gitlab.com/chpio/simple-easing`).
+GitHub (`github.com/chpio/simple-easing`), mirrored to GitLab (`gitlab.com/chpio/simple-easing`).
 
 ## Commands
 
