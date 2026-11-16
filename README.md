@@ -51,6 +51,11 @@ let a = halfway(cubic_in);
 let b = halfway(&easings[1]);
 ```
 
+## Repository
+
+The source lives on [GitHub](https://github.com/chpio/simple-easing), with a mirror on
+[GitLab](https://gitlab.com/chpio/simple-easing).
+
 ## License
 
 Licensed under either of [MIT](LICENSE-MIT) or [Apache-2.0](LICENSE-APACHE), at your option.
